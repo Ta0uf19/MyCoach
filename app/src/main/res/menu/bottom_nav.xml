@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_dashboard"
+        android:icon="@drawable/ic_dashboard"
+        android:contentDescription="Dashboard"
+        android:title="Dashboard" />
+    <item
+        android:id="@+id/nav_fitness"
+        android:icon="@drawable/ic_fitness"
+        android:contentDescription="Fit"
+        android:title="Fit" />
+    <item
+        android:id="@+id/nav_chatbot"
+        android:contentDescription=""
+        android:title=""
+        android:iconTintMode="src_atop" />
+    <item
+        android:id="@+id/nav_meal"
+        android:icon="@drawable/ic_eat"
+        android:contentDescription="Eat"
+        android:title="Eat" />
+
+    <item
+        android:id="@+id/nav_settings"
+        android:icon="@drawable/ic_settings"
+        android:contentDescription="Settings"
+        android:title="Settings" />
+</menu>

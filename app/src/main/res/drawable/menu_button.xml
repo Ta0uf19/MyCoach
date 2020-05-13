@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--<layer-list xmlns:android="http://schemas.android.com/apk/res/android">-->
+<!--    <item>-->
+<!--        <shape xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--            android:shape="oval">-->
+<!--            -->
+<!--        </shape>-->
+<!--    </item>-->
+<!--    <item android:gravity="center">-->
+<!--        <bitmap android:src="@mipmap/ic_chatbot_foreground"-->
+<!--            android:gravity="fill_horizontal" />-->
+<!--    </item>-->
+<!--</layer-list>-->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:gravity="center">
+        <bitmap android:src="@mipmap/ic_chatbot_foreground"
+                android:gravity="fill_horizontal" />
+    </item>
+</layer-list>

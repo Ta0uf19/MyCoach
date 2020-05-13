@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/nav_dashboard">
+    <fragment
+        android:id="@+id/entryFragment"
+        android:name="io.mycoach.ui.EntryFragment"
+        android:label="activity_entry"
+        tools:layout="@layout/fragment_entry" >
+        <action
+            android:id="@+id/action_entryFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/action_entryFragment_to_registerFragment"
+            app:destination="@id/registerFragment"
+            app:enterAnim="@android:anim/slide_in_left" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="io.mycoach.ui.auth.LoginFragment"
+        android:label="activity_login"
+        tools:layout="@layout/fragment_login" />
+    <fragment
+        android:id="@+id/nav_dashboard"
+        android:name="io.mycoach.ui.dashboard.DashboardFragment"
+        android:label="DashboardFragment" >
+        <action
+            android:id="@+id/action_dashboardFragment_to_entryFragment"
+            app:destination="@id/entryFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_chatFragment"
+            app:destination="@id/nav_chatbot" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="io.mycoach.ui.auth.RegisterFragment"
+        android:label="RegisterFragment" />
+    <fragment
+        android:id="@+id/nav_chatbot"
+        android:name="io.mycoach.ui.chat.ChatFragment"
+        android:label="ChatFragment" />
+    <fragment
+        android:id="@+id/nav_fitness"
+        android:name="io.mycoach.ui.fitness.FitnessFragment"
+        android:label="FitnessFragment" />
+    <fragment
+        android:id="@+id/nav_meal"
+        android:name="io.mycoach.ui.meal.MealFragment"
+        android:label="MealFragment" />
+    <fragment
+        android:id="@+id/nav_settings"
+        android:name="io.mycoach.ui.setting.SettingFragment"
+        android:label="SettingFragment">
+    </fragment>
+</navigation>
