@@ -101,9 +101,9 @@ public class ChatFragment extends Fragment implements MessageInput.InputListener
     @Override
     public String format(Date date) {
         if (DateFormatter.isToday(date)) {
-            return "Today";
+            return "Aujourd'hui";
         } else if (DateFormatter.isYesterday(date)) {
-            return "Yersterday";
+            return "Hier";
         } else {
             return DateFormatter.format(date, DateFormatter.Template.STRING_DAY_MONTH_YEAR);
         }

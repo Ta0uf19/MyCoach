@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/input"
         app:dateHeaderFormat="dd MMMM yyyy"
-        app:incomingDefaultBubbleColor="#fff"
+        app:incomingDefaultBubbleColor="#E4E4E4"
         app:incomingDefaultBubblePressedColor="@color/ivory_dark"
         app:incomingDefaultBubbleSelectedColor="@color/gray"
         app:incomingDefaultImageOverlayPressedColor="@color/black_10"
