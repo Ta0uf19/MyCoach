@@ -15,7 +15,6 @@ public class LoginViewModel extends ViewModel {
     String username;
 
     public LoginViewModel() {
-        // the user is always unauthenticated when MainActivity is launched, cache it later.
         authState.setValue(AuthState.UNAUTHENTICATED);
         username = "";
     }

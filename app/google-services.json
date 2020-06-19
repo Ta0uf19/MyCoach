@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "106637688072",
+    "firebase_url": "https://mycoach-77f86.firebaseio.com",
+    "project_id": "mycoach-77f86",
+    "storage_bucket": "mycoach-77f86.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:106637688072:android:2e3485f01dc752c45140bd",
+        "android_client_info": {
+          "package_name": "io.mycoach"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "106637688072-go1qc533ig9a8trbmoth810pg8c3o86e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3_NHuZO72aeRP7MR3r5Mkb02BfHtI-gA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "106637688072-go1qc533ig9a8trbmoth810pg8c3o86e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

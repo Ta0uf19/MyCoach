@@ -1,54 +1,82 @@
 package io.mycoach.ui.dashboard;
 
-import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.mikhaellopez.circularimageview.CircularImageView;
+import com.squareup.picasso.Picasso;
+
+import org.jetbrains.annotations.NotNull;
+import org.w3c.dom.Text;
+
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import io.mycoach.R;
+import io.mycoach.model.Workout;
+import io.mycoach.ui.widget.WorkoutTimerActivity;
 
-public class TrainingAdapter extends RecyclerView<TrainingAdapter.ViewHolder> {
+public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.ViewHolder> {
+    private static final String TAG = "WorkoutAdapter";
 
-    public TrainingAdapter(@NonNull Context context) {
-        super(context);
+    private List<Workout> workoutList;
+
+    public WorkoutAdapter(List<Workout> workout) {
+        this.workoutList = workout;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView textAlbumName;
-        private ImageView imageView;
+        @BindView(R.id.workout_avatar)
+        CircularImageView picture;
+
+        @BindView(R.id.workout_name)
+        TextView name;
+
+        @BindView(R.id.workout_repeats)
+        TextView repeats;
+
         private View itemView;
 
         public ViewHolder(View itemView) {
             super(itemView);
             this.itemView = itemView;
-
-            textAlbumName = itemView.findViewById(R.id.textAlbumName);
-            imageView = itemView.findViewById(R.id.imageAlbum);
+            ButterKnife.bind(this, itemView);
         }
     }
 
 
-    // Create new views (invoked by the layout manager)
+    @NotNull
     @Override
-    public TrainingAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
-                                                      int viewType) {
-        // create a new view
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.cell_album, parent, false);
-        ViewHolder vh = new ViewHolder(view);
-        return vh;
+    public WorkoutAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cv_cell_workout, parent, false);
+        return new ViewHolder(view);
     }
 
-    // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        Workout workout = workoutList.get(position);
+        holder.name.setText(workout.getName());
+        holder.repeats.setText(workout.getSeries() + " SER | "+ workout.getRepeats() +  " REP");
+        Picasso.get().load(workout.getPicture()).into(holder.picture);
 
+        holder.itemView.setOnClickListener(view -> {
+            Log.d(TAG, workout.toString());
+            Intent intent = new Intent(view.getContext(), WorkoutTimerActivity.class);
+            intent.putExtra("Workout", workout);
+            view.getContext().startActivity(intent);
+        });
+    }
 
+    @Override
+    public int getItemCount() {
+        return workoutList.size();
     }
 }

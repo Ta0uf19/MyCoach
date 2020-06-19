@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="io.mycoach">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -17,7 +19,7 @@
             </intent-filter>
         </activity>
 <!--        <activity android:name=".ui.login.LoginFragment" android:windowSoftInputMode="stateHidden|adjustResize"></activity>-->
-<!--        <activity android:name=".ui.register.RegisterFragment"></activity>-->
+        <activity android:name=".ui.widget.WorkoutTimerActivity"></activity>
 <!--        <activity android:name=".ui.EntryFragment"></activity>-->
     </application>
 

@@ -48,7 +48,6 @@ public class LoginFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         viewModel = new ViewModelProvider(requireActivity()).get(LoginViewModel.class);
 
-        // listner
         login.setOnClickListener(v ->
                 viewModel.authenticate(username.getText().toString(), password.getText().toString())
         );

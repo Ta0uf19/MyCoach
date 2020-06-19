@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/rootView"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_marginEnd="16dp"
+    android:layout_width="65dp"
+    android:layout_height="wrap_content"
+    android:paddingStart="4dp"
+    android:paddingEnd="4dp"
+    android:background="@drawable/background_default"
+    android:paddingTop="3dp"
+    android:paddingBottom="3dp"
+    android:layout_marginRight="16dp">
+
+    <TextView
+        android:fontFamily="@font/formular_medium"
+        android:layout_marginTop="8dp"
+        android:id="@+id/monthView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:singleLine="true"
+        android:textColor="@color/mycoach"
+        android:textSize="@dimen/monthTextSize"
+        tools:text="Feb" />
+
+    <TextView
+        android:fontFamily="@font/formular_bold"
+        android:id="@+id/dateView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:maxLength="2"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:textColor="@color/mycoach"
+        android:textSize="@dimen/dateTextSize"
+        tools:text="23"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:fontFamily="@font/formular_medium"
+        android:layout_marginBottom="8dp"
+        android:id="@+id/dayView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:ellipsize="end"
+        android:gravity="center_horizontal"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:textColor="@color/mycoach"
+        android:textSize="@dimen/dayTextSize"
+        tools:text="Sabtu"/>
+</LinearLayout>

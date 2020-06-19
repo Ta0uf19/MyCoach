@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-
+apply plugin: 'com.google.gms.google-services'
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
@@ -59,4 +59,30 @@ dependencies {
     //
     implementation 'com.github.stfalcon:chatkit:0.3.3'
     implementation 'com.squareup.picasso:picasso:2.71828'
+
+    // firebase sdk
+    implementation 'com.firebaseui:firebase-ui-auth:6.2.0'
+    implementation 'com.google.firebase:firebase-auth:19.3.1'
+    implementation 'com.google.firebase:firebase-firestore:21.4.3'
+    implementation 'com.google.firebase:firebase-functions:19.0.2'
+
+    // retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+
+    // datepicker
+    implementation project(path: ':datepicker')
+
+    implementation "androidx.coordinatorlayout:coordinatorlayout:1.1.0"
+    implementation "androidx.recyclerview:recyclerview:1.1.0"
+    implementation "androidx.cardview:cardview:1.0.0"
+
+    // circular imageview
+    implementation 'com.mikhaellopez:circularimageview:4.2.0'
+
+    implementation 'com.github.krtkush:LinearTimer:2.1.1'
+
+    // date picker
+    //implementation 'com.vivekkaushik.datepicker:datePickerTimeline:0.0.4'
+
 }

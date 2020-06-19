@@ -2,9 +2,6 @@ package io.mycoach;
 
 import android.app.Application;
 
-/**
- * Note: never store mutable data here!
- */
 public class App extends Application {
 
     private static App instance;

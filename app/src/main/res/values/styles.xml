@@ -49,6 +49,17 @@
     </style>
 
 
+    <style name="TextAppearance.Collapsed"
+        parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:fontFamily">@font/formular_medium</item>
+    </style>
+    <style name="TextAppearance.Expanded"
+        parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:fontFamily">@font/formular_medium</item>
+    </style>
+
 
 
 </resources>
