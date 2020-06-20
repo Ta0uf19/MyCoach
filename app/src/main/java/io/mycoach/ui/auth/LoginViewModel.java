@@ -1,7 +1,10 @@
 package io.mycoach.ui.auth;
 
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
+
+import io.mycoach.repository.AuthRepository;
 
 public class LoginViewModel extends ViewModel {
 
@@ -11,30 +14,25 @@ public class LoginViewModel extends ViewModel {
         INVALID_AUTHENTICATION  // Authentication failed
     }
     private MutableLiveData<AuthState> authState = new MutableLiveData<>();
-
-    String username;
+    private Observer observer;
+    String email;
 
     public LoginViewModel() {
         authState.setValue(AuthState.UNAUTHENTICATED);
-        username = "";
+        email = "";
     }
 
-    public void authenticate(String username, String password) {
-        if (passwordIsValidForUsername(username, password)) {
-            this.username = username;
-            authState.setValue(AuthState.AUTHENTICATED);
-        } else {
-            authState.setValue(AuthState.INVALID_AUTHENTICATION);
-        }
-    }
+    public void authenticate(String email, String password) {
 
-    public void refuseAuthentication() {
-        authState.setValue(AuthState.UNAUTHENTICATED);
-    }
+        this.observer = new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean status) {
+                if(status) authState.setValue(AuthState.AUTHENTICATED);
+                else authState.setValue(AuthState.INVALID_AUTHENTICATION);
+            }
+        };
+        AuthRepository.signIn(email, password).observeForever(observer);
 
-
-    private boolean passwordIsValidForUsername(String username, String password) {
-        return true;
     }
 
     public MutableLiveData<AuthState> getAuthState() {

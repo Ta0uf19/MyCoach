@@ -2,6 +2,7 @@ package io.mycoach.ui.dashboard;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +22,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.vivekkaushik.datepicker.DatePickerTimeline;
 import com.vivekkaushik.datepicker.OnDateSelectedListener;
 
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -67,13 +67,13 @@ public class DashboardFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
 
         List<Workout> workout = new ArrayList<Workout>() {{
-            add(new Workout("Biceps - EZ bar Cur", "https://i.snipboard.io/P9umXU.jpg", 1,2));
-            add(new Workout("Biceps - EZ bar Cur", "https://i.snipboard.io/0lHijk.jpg", 1,2));
-            add(new Workout("Biceps - EZ bar Cur", "https://i.snipboard.io/P9umXU.jpg", 1,2));
-            add(new Workout("PULL-UP", "https://i.snipboard.io/0lHijk.jpg", 1,2));
-            add(new Workout("Biceps - EZ bar Cur", "https://i.snipboard.io/0lHijk.jpg", 1,2));
-            add(new Workout("Biceps - EZ bar Cur", "https://i.snipboard.io/P9umXU.jpg", 1,2));
-            add(new Workout("Biceps - EZ bar Cur", "https://i.snipboard.io/P9umXU.jpg", 1,2));
+            add(new Workout("Biceps - EZ bar Cur", "https://i.snipboard.io/P9umXU.jpg", 1,2, 10));
+            add(new Workout("Biceps - EZ bar Cur", "https://i.snipboard.io/0lHijk.jpg", 1,2, 10));
+            add(new Workout("Biceps - EZ bar Cur", "https://i.snipboard.io/P9umXU.jpg", 1,2, 10));
+            add(new Workout("PULL-UP", "https://i.snipboard.io/0lHijk.jpg", 1,2, 10));
+            add(new Workout("Biceps - EZ bar Cur", "https://i.snipboard.io/0lHijk.jpg", 1,2, 10));
+            add(new Workout("Biceps - EZ bar Cur", "https://i.snipboard.io/P9umXU.jpg", 1,2, 10));
+            add(new Workout("Biceps - EZ bar Cur", "https://i.snipboard.io/P9umXU.jpg", 1,2, 10));
         }};
 
         //static
@@ -83,15 +83,15 @@ public class DashboardFragment extends Fragment {
         // calendar setup
         Calendar calendar = Calendar.getInstance();
         datePickerTimeline.setActiveDate(calendar);
-        //datePickerTimeline.s
-        // Set a Start date (Default, 1 Jan 1970)
-        datePickerTimeline.setInitialDate(2019, 6, 18);
+
+        // Set a Start date
+        datePickerTimeline.setInitialDate(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
 
         // Set a date Selected Listener
         datePickerTimeline.setOnDateSelectedListener(new OnDateSelectedListener() {
             @Override
             public void onDateSelected(int year, int month, int day, int dayOfWeek) {
-                // Do Something
+                Log.d(TAG, year  + " " + month  + " " +  day);
             }
 
             @Override

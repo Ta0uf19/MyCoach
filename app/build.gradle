@@ -82,6 +82,8 @@ dependencies {
 
     implementation 'com.github.krtkush:LinearTimer:2.1.1'
 
+    implementation 'br.com.simplepass:loading-button-android:2.2.0'
+
     // date picker
     //implementation 'com.vivekkaushik.datepicker:datePickerTimeline:0.0.4'
 

@@ -9,6 +9,7 @@
 
     <TextView
         android:id="@+id/workout_timer_title"
+        android:textAlignment="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/formular_bold"
@@ -22,28 +23,85 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.050000012" />
+        app:layout_constraintVertical_bias="0.060000002" />
 
-<!--    <TextView-->
-<!--        android:id="@+id/workout_timer_time"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginStart="75dp"-->
-<!--        android:layout_marginTop="166dp"-->
-<!--        android:layout_marginEnd="160dp"-->
-<!--        android:layout_marginBottom="159dp"-->
-<!--        android:fontFamily="@font/formular_bold"-->
-<!--        android:paddingStart="10dp"-->
-<!--        android:paddingEnd="10dp"-->
-<!--        android:paddingBottom="20dp"-->
-<!--        android:text="0:46"-->
-<!--        android:textColor="@color/white"-->
-<!--        android:textSize="40sp"-->
-<!--        app:layout_constraintBottom_toBottomOf="@+id/linearTimer"-->
-<!--        app:layout_constraintEnd_toEndOf="@+id/linearTimer"-->
-<!--        app:layout_constraintStart_toEndOf="@+id/linearTimer"-->
-<!--        app:layout_constraintStart_toStartOf="@+id/linearTimer"-->
-<!--        app:layout_constraintTop_toTopOf="@+id/linearTimer" />-->
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.26"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.14">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/formular_regular"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="20dp"
+            android:text="Repetition"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/workout_timer_repeats"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/formular_bold"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="20dp"
+            android:text="0"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.74"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.14">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/formular_regular"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="20dp"
+            android:text="Sets"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/workout_timer_sets"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/formular_bold"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="20dp"
+            android:text="0"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
 
     <RelativeLayout
         android:id="@+id/timer"
@@ -57,7 +115,7 @@
         <TextView
             android:id="@+id/time"
             android:fontFamily="@font/formular_bold"
-            android:text="00:40"
+            android:text="00:00"
             android:textSize="40sp"
             android:textColor="@color/white"
             android:layout_width="wrap_content"
@@ -76,65 +134,6 @@
             app:progressColor="#B5BDF9" />
 
     </RelativeLayout>
-<!--    <RelativeLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent">-->
-
-<!--        <Button-->
-<!--        android:id="@+id/startTimer"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_centerInParent="true"-->
-<!--        android:text="Start"/>-->
-
-<!--        <Button-->
-<!--            android:id="@+id/pauseTimer"-->
-<!--            android:layout_below="@+id/startTimer"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_centerInParent="true"-->
-<!--            android:text="Pause"/>-->
-
-<!--        <Button-->
-<!--            android:id="@+id/resumeTimer"-->
-<!--            android:layout_below="@+id/pauseTimer"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_centerInParent="true"-->
-<!--            android:text="resume"/>-->
-
-<!--        <Button-->
-<!--            android:id="@+id/resetTimer"-->
-<!--            android:layout_below="@+id/resumeTimer"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_centerInParent="true"-->
-<!--            android:text="Reset"/>-->
-
-<!--        <Button-->
-<!--            android:id="@+id/restartTimer"-->
-<!--            android:layout_below="@+id/resetTimer"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_centerInParent="true"-->
-<!--            android:text="Restart"/>-->
-<!--    </RelativeLayout>-->
-
-<!--    <io.github.krtkush.lineartimer.LinearTimerView-->
-<!--        android:id="@+id/linearTimer"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_centerHorizontal="true"-->
-<!--        app:initialColor="#3B46A0"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.42"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintVertical_bias="0.385"-->
-<!--        app:progressColor="#B5BDF9"-->
-<!--        app:radius="80dp"-->
-<!--        app:strokeWidth="3dp" />-->
 
     <ImageButton
         android:id="@+id/stopTimer"

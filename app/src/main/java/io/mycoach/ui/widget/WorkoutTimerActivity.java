@@ -1,5 +1,6 @@
 package io.mycoach.ui.widget;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -31,10 +32,22 @@ public class WorkoutTimerActivity extends AppCompatActivity implements LinearTim
     @BindView(R.id.controlTimer)
     ImageButton controlTimer;
 
+    @BindView(R.id.linearTimer)
+    LinearTimerView linearTimerView;
+
+    @BindView(R.id.time)
+    TextView time;
+
+    @BindView(R.id.workout_timer_sets)
+    TextView sets;
+
+    @BindView(R.id.workout_timer_repeats)
+    TextView repeats;
+
     private LinearTimer linearTimer;
-    private TextView time;
+    private Workout workout;
 
-
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,15 +55,16 @@ public class WorkoutTimerActivity extends AppCompatActivity implements LinearTim
 
         ButterKnife.bind(this);
 
-        // search data
-        Workout workout = (Workout) getIntent().getSerializableExtra("Workout");
+        // get data from intetn
+        workout = (Workout) getIntent().getSerializableExtra("Workout");
+
         title.setText(workout.getName());
+        time.setText(workout.getDuration()+":00");
+        repeats.setText(Integer.toString(workout.getRepeats()));
+        sets.setText(Integer.toString(workout.getSets()));
 
-
-        LinearTimerView linearTimerView = findViewById(R.id.linearTimer);
-        time = findViewById(R.id.time);
-
-        long duration = 10 * 1000;
+        // duration in minutes
+        long duration = workout.getDuration() * 60 * 1000;
 
 
         this.linearTimer = new LinearTimer.Builder()
@@ -108,15 +122,14 @@ public class WorkoutTimerActivity extends AppCompatActivity implements LinearTim
 
         String formattedTime = String.format("%02d:%02d",
                 TimeUnit.MILLISECONDS.toMinutes(tickUpdateInMillis),
-                TimeUnit.MILLISECONDS.toSeconds(tickUpdateInMillis)
-                        - TimeUnit.MINUTES
-                        .toSeconds(TimeUnit.MILLISECONDS.toHours(tickUpdateInMillis)));
+                (TimeUnit.MILLISECONDS.toSeconds(tickUpdateInMillis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toHours(tickUpdateInMillis))) % 60
+        );
 
         time.setText(formattedTime);
     }
 
     @Override
     public void onTimerReset() {
-        time.setText("");
+        time.setText(workout.getDuration()+":00");
     }
 }

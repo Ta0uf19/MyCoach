@@ -64,7 +64,7 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.ViewHold
     public void onBindViewHolder(ViewHolder holder, int position) {
         Workout workout = workoutList.get(position);
         holder.name.setText(workout.getName());
-        holder.repeats.setText(workout.getSeries() + " SER | "+ workout.getRepeats() +  " REP");
+        holder.repeats.setText(workout.getSets() + " SER | "+ workout.getRepeats() +  " REP");
         Picasso.get().load(workout.getPicture()).into(holder.picture);
 
         holder.itemView.setOnClickListener(view -> {

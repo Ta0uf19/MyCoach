@@ -1,7 +1,5 @@
 package io.mycoach.model;
-
 import java.io.Serializable;
-import java.time.Duration;
 
 @SuppressWarnings("serial")
 public class Workout implements Serializable {
@@ -10,16 +8,34 @@ public class Workout implements Serializable {
     private String desc;
     private String picture;
     private int repeats;
+    private int duration; // minutes
     private int sets;
 
 
-    public Workout(String name, String picture, int repeats, int sets) {
+    /**
+     * Create a workout exercice
+     *
+     * @param name name of exercice
+     * @param picture avatar
+     * @param repeats repetition of exercice per set
+     * @param sets repetition of exercice
+     * @param duration in minutes
+     */
+    public Workout(String name, String picture, int repeats, int sets, int duration) {
         this.name = name;
         this.picture = picture;
         this.repeats = repeats;
         this.sets = sets;
+        this.duration = duration;
     }
 
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
 
     public String getName() {
         return name;
@@ -37,7 +53,7 @@ public class Workout implements Serializable {
         return repeats;
     }
 
-    public int getSeries() {
+    public int getSets() {
         return sets;
     }
 
@@ -48,7 +64,8 @@ public class Workout implements Serializable {
                 ", desc='" + desc + '\'' +
                 ", picture='" + picture + '\'' +
                 ", repeats=" + repeats +
-                ", series=" + sets +
+                ", duration=" + duration +
+                ", sets=" + sets +
                 '}';
     }
 }

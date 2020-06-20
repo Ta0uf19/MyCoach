@@ -6,6 +6,10 @@ import com.google.firebase.firestore.Exclude;
 import com.stfalcon.chatkit.commons.models.IUser;
 
 import java.io.Serializable;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 public class User extends BaseObservable implements IUser, Serializable {
 
@@ -15,15 +19,26 @@ public class User extends BaseObservable implements IUser, Serializable {
     private String password;
     private String avatar;
 
-    @Exclude
-    private boolean isAuthenticated;
-    @Exclude
-    private boolean isNew, isCreated;
+    private String type_workout;
+    private String[] weekly_days;
+    private String weekly_workout;
+    private Map<String, String> workouts;
 
-    public User(String id, String name, String email) {
+    public User() {
+        this.id = UUID.randomUUID().toString().replace("-", "");
+    }
+    public User(String id) {
         this.id = id;
-        this.name = name;
-        this.avatar = email;
+        this.workouts = new HashMap<String, String>();
+    }
+    public User(String email, String password) {
+        this(UUID.randomUUID().toString());
+        this.password = password;
+        this.email = email;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     @Override
@@ -57,28 +72,57 @@ public class User extends BaseObservable implements IUser, Serializable {
         return password;
     }
 
-    public boolean isAuthenticated() {
-        return isAuthenticated;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public void setAuthenticated(boolean authenticated) {
-        isAuthenticated = authenticated;
+    public String getType_workout() {
+        return type_workout;
     }
 
-    public boolean isNew() {
-        return isNew;
+    public void setType_workout(String type_workout) {
+        this.type_workout = type_workout;
     }
 
-    public void setNew(boolean aNew) {
-        isNew = aNew;
+    public String[] getWeekly_days() {
+        return weekly_days;
     }
 
-    public boolean isCreated() {
-        return isCreated;
+    public void setWeekly_days(String[] weekly_days) {
+        this.weekly_days = weekly_days;
     }
 
-    public void setCreated(boolean created) {
-        isCreated = created;
+    public String getWeekly_workout() {
+        return weekly_workout;
     }
 
+    public void setWeekly_workout(String weekly_workout) {
+        this.weekly_workout = weekly_workout;
+    }
+
+    public Map<String, String> getWorkouts() {
+        return workouts;
+    }
+
+    public void setWorkouts(Map<String, String> workouts) {
+        this.workouts = workouts;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id='" + id + '\'' +
+                ", email='" + email + '\'' +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", avatar='" + avatar + '\'' +
+                ", type_workout='" + type_workout + '\'' +
+                ", weekly_days=" + Arrays.toString(weekly_days) +
+                ", weekly_workout='" + weekly_workout + '\'' +
+                ", workouts=" + workouts +
+                '}';
+    }
 }

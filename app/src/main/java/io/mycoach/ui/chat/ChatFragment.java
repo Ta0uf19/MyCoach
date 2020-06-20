@@ -76,10 +76,13 @@ public class ChatFragment extends Fragment implements
         this.messageInput.setInputListener(this);
 
         this.botService = new BotService();
-        this.botUser = new User("1", "CoashBot", "nothing");
+
+        // set bot as a user
+        this.botUser = new User("1");
+        this.botUser.setName("MyCoashBot");
         this.botUser.setAvatar("https://i.imgur.com/SsGLs1r.png");
 
-        this.user = new User("0", "User", "email@gmail.com");
+        this.user = new User("0");
 
         // init adapter
         initAdapter();
@@ -101,6 +104,18 @@ public class ChatFragment extends Fragment implements
 
         Message msg2 = new Message(getRandomId(), botUser, "Je suis votre coach virtuelle, permettez-moi de vous poser quelques questions pour mieux vous connaître");
         messagesAdapter.addToStart(msg2, true);
+
+        Message msg3 = new Message(getRandomId(), botUser, "Combien de fois tu peux t’entrainer dans la semaine ?");
+        messagesAdapter.addToStart(msg3, true);
+    }
+
+
+    /**
+     * Return a random question
+     */
+    public void askQuestions() {
+
+
     }
 
 
@@ -155,36 +170,12 @@ public class ChatFragment extends Fragment implements
         }
     }
 
-//    private MessagesListAdapter.Formatter<Message> getMessageStringFormatter() {
-//        return new MessagesListAdapter.Formatter<Message>() {
-//            @Override
-//            public String format(Message message) {
-//                String createdAt = new SimpleDateFormat("MMM d, EEE 'at' h:mm a", Locale.getDefault())
-//                        .format(message.getCreatedAt());
-//
-//                String text = message.getText();
-//                if (text == null) text = "[attachment]";
-//
-//                return String.format(Locale.getDefault(), "%s: %s (%s)",
-//                        message.getUser().getName(), text, createdAt);
-//            }
-//        };
-//    }
+
     @Override
     public void onSelectionChanged(int count) {
         this.selectionCount = count;
     }
 
-//    protected void loadMessages() {
-//        new Handler().postDelayed(new Runnable() {  //imitation of internet connection
-//            @Override
-//            public void run() {
-//                ArrayList<Message> messages = MessagesFixtures.getMessages(lastLoadedDate);
-//                lastLoadedDate = messages.get(messages.size() - 1).getCreatedAt();
-//                messagesAdapter.addToEnd(messages, false);
-//            }
-//        }, 1000);
-//    }
 
     /**
      * Load more message

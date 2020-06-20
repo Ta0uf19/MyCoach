@@ -1,59 +1,80 @@
 package io.mycoach.ui.auth;
+import android.text.TextUtils;
 import android.util.Log;
+import android.util.Patterns;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-
 import io.mycoach.model.User;
+import io.mycoach.repository.AuthRepository;
 
 public class RegisterViewModel extends ViewModel {
     private static final String TAG = "RegisterViewModel";
 
-    private FirebaseAuth auth = FirebaseAuth.getInstance();
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference usersRef =  db.collection("users");
-    LiveData<User> createdUserLiveData;
+    public enum RegisterState {
+        REGISTERED_SUCCESS,
+        ERROR_TYPING,
+        FAILED,
+        ALREADY_EXISTS
+    }
+    private MutableLiveData<RegisterState> registerState = new MutableLiveData<>();
+    private Observer observer;
+    public User user;
 
+    public RegisterViewModel() {
+        this.user = new User();
+    }
 
-    public RegisterViewModel() {}
+    public LiveData<RegisterState> getRegisterState() {
+        return registerState;
+    }
 
+    public void onLoginClicked() {
+        if (isInputDataValid()) {
+            Log.d(TAG, "input is valid user:  " + user);
+            createUser(user);
+        }
+        else {
+            Log.d(TAG, "input is invalid user:  " + user);
+            this.registerState.setValue(RegisterState.ERROR_TYPING);
+        }
+    }
 
     /**
-     * Créer un utilisateur
-     *
-     * @param user aze
-     * @return Le nouveau utilisateur crée
+     * Is valid ?
+     * Refactor to model?
+     * @return
      */
-    MutableLiveData<User> createUser(User user) {
+    public boolean isInputDataValid() {
+        return !TextUtils.isEmpty(user.getEmail())
+                && Patterns.EMAIL_ADDRESS.matcher(user.getEmail()).matches()
+                && user.getPassword().length() > 6;
+    }
 
-        MutableLiveData<User> newUserMutableLiveData = new MutableLiveData<>();
-        DocumentReference uidRef = usersRef.document(user.getId());
-        uidRef.get().addOnCompleteListener(uidTask -> {
-            if (uidTask.isSuccessful()) {
-                DocumentSnapshot document = uidTask.getResult();
-                if (!document.exists()) {
-                    uidRef.set(user).addOnCompleteListener(userCreationTask -> {
-                        if (userCreationTask.isSuccessful()) {
-                            user.setCreated(true);
-                            newUserMutableLiveData.setValue(user);
-                        } else {
-                            Log.e(TAG, userCreationTask.getException().getMessage());
-                        }
-                    });
-                } else {
-                    newUserMutableLiveData.setValue(user);
-                }
-            } else {
-                Log.e(TAG, uidTask.getException().getMessage());
+    /**
+     * Create a user state
+     * @param user
+     */
+    private void createUser(User user) {
+
+        observer = new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean status) {
+                    if(status)
+                        registerState.setValue(RegisterState.REGISTERED_SUCCESS);
+                    else
+                        registerState.setValue(RegisterState.ALREADY_EXISTS);
             }
-        });
+        };
 
-        return newUserMutableLiveData;
+        AuthRepository.save(user).observeForever(observer);
+    }
+
+    @Override
+    protected void onCleared() {
+        super.onCleared();
+        AuthRepository.save(user).removeObserver(observer);
     }
 }
