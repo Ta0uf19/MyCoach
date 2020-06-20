@@ -34,11 +34,13 @@ public class AuthRepository {
     private static FirebaseFirestore db = FirebaseFirestore.getInstance();
     private static CollectionReference usersRef =  db.collection("users");
 
+
     /**
      * Find a user by email
      * @param email
      */
-    public static void find(String email) {
+    public static LiveData<User> find(String email) {
+        MutableLiveData<User> userLive = new MutableLiveData<User>();
 
         DocumentReference uidRef = usersRef.document(email);
         uidRef.get().addOnCompleteListener(task -> {
@@ -46,7 +48,9 @@ public class AuthRepository {
                 DocumentSnapshot document = task.getResult();
                 if(document.exists()) {
                     document.getData();
-                    Log.d(TAG, "User :  " + document.toObject(User.class));
+                    User user = document.toObject(User.class);
+                    userLive.setValue(user);
+                    Log.d(TAG, "User :  " + user);
                 }
                 else {
                     Log.d(TAG, "no such user");
@@ -55,6 +59,8 @@ public class AuthRepository {
                 Log.d(TAG, "get failed with ", task.getException());
             }
         });
+
+        return userLive;
     }
 
     /**
@@ -84,13 +90,48 @@ public class AuthRepository {
         return status;
     }
 
+    /**
+     * Update a user
+     * @param user
+     * @return
+     */
+    public static LiveData<Boolean> update(User user) {
+        MutableLiveData<Boolean> status = new MutableLiveData<>(false);
+
+        DocumentReference uidRef = usersRef.document(user.getEmail());
+        uidRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                DocumentSnapshot document = task.getResult();
+                if(document.exists()) {
+                    document.getData();
+                    uidRef.set(user).addOnCompleteListener(userCreationTask -> {
+                        if (userCreationTask.isSuccessful()) {
+                            Log.e(TAG, "updatedUser:ok");
+                            status.setValue(true);
+                        } else {
+                            Log.e(TAG, userCreationTask.getException().getMessage());
+                        }
+                    });
+
+                    Log.d(TAG, "update user :  " + document.toObject(User.class));
+                }
+                else {
+                    Log.d(TAG, "no such user to update");
+                }
+            } else {
+                Log.d(TAG, "update failed with ", task.getException());
+            }
+        });
+
+        return status;
+    }
 
     /**
      * Create a user
      * @param user
      * @return boolean to indicate if user is created or not
      */
-    public static LiveData<Boolean> save(User user) {
+    public static LiveData<Boolean> create(User user) {
         MutableLiveData<Boolean> status = new MutableLiveData<>(false);
 
         if(user == null || Strings.isNullOrEmpty(user.getEmail()) || Strings.isNullOrEmpty(user.getPassword())) {
@@ -103,14 +144,15 @@ public class AuthRepository {
                 if(task.isSuccessful()) {
                     Log.d(TAG, "createUserWithEmail:success");
                     user.setId(auth.getCurrentUser().getUid());
+                    user.setNew(true);
 
                     // update display name for auth user
                     updateAuthDisplayName(user.getName());
 
                     // save user in firestore database
-                    saveInFireStore(user);
-
-                    status.setValue(true);
+                    saveInFireStore(user).observeForever( stat -> {
+                        if(stat) status.setValue(true);
+                    });
                 }
                 else {
                     Log.w(TAG, "createUserWithEmail:failure", task.getException());
@@ -166,7 +208,8 @@ public class AuthRepository {
         auth.signOut();
     }
 
-    private static void saveInFireStore(User user) {
+    private static LiveData<Boolean> saveInFireStore(User user) {
+        MutableLiveData<Boolean> status = new MutableLiveData<>(false);
 
         DocumentReference uidRef = usersRef.document(user.getEmail());
         uidRef.get().addOnCompleteListener(uidTask -> {
@@ -178,6 +221,7 @@ public class AuthRepository {
                     uidRef.set(user).addOnCompleteListener(userCreationTask -> {
                         if (userCreationTask.isSuccessful()) {
                             Log.e(TAG, "createdUserInFireStore:ok");
+                            status.setValue(true);
                         } else {
                             Log.e(TAG, userCreationTask.getException().getMessage());
                         }
@@ -189,6 +233,8 @@ public class AuthRepository {
                 Log.e(TAG, uidTask.getException().getMessage());
             }
         });
+
+        return status;
     }
 
     private static void updateAuthDisplayName(String name) {

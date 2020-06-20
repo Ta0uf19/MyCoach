@@ -2,7 +2,6 @@ package io.mycoach.fixtures;
 
 import java.security.SecureRandom;
 import java.util.ArrayList;
-import java.util.UUID;
 
 abstract class FixturesData {
 
@@ -72,35 +71,5 @@ abstract class FixturesData {
         }
     };
 
-    static String getRandomId() {
-        return Long.toString(UUID.randomUUID().getLeastSignificantBits());
-    }
 
-    static String getRandomAvatar() {
-        return avatars.get(rnd.nextInt(avatars.size()));
-    }
-
-    static String getRandomGroupChatImage() {
-        return groupChatImages.get(rnd.nextInt(groupChatImages.size()));
-    }
-
-    static String getRandomGroupChatTitle() {
-        return groupChatTitles.get(rnd.nextInt(groupChatTitles.size()));
-    }
-
-    static String getRandomName() {
-        return names.get(rnd.nextInt(names.size()));
-    }
-
-    static String getRandomMessage() {
-        return messages.get(rnd.nextInt(messages.size()));
-    }
-
-    static String getRandomImage() {
-        return images.get(rnd.nextInt(images.size()));
-    }
-
-    static boolean getRandomBoolean() {
-        return rnd.nextBoolean();
-    }
 }

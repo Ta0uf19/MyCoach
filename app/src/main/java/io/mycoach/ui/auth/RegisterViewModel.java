@@ -64,17 +64,17 @@ public class RegisterViewModel extends ViewModel {
             public void onChanged(Boolean status) {
                     if(status)
                         registerState.setValue(RegisterState.REGISTERED_SUCCESS);
-                    else
-                        registerState.setValue(RegisterState.ALREADY_EXISTS);
+//                    else
+//                        registerState.setValue(RegisterState.ALREADY_EXISTS);
             }
         };
 
-        AuthRepository.save(user).observeForever(observer);
+        AuthRepository.create(user).observeForever(observer);
     }
 
     @Override
     protected void onCleared() {
         super.onCleared();
-        AuthRepository.save(user).removeObserver(observer);
+        AuthRepository.create(user).removeObserver(observer);
     }
 }

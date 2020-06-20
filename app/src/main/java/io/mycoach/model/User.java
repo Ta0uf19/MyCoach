@@ -4,6 +4,7 @@ import androidx.databinding.BaseObservable;
 import com.stfalcon.chatkit.commons.models.IUser;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -116,5 +117,19 @@ public class User extends BaseObservable implements IUser, Serializable {
         this.workouts = workouts;
     }
 
-
+    @Override
+    public String toString() {
+        return "User{" +
+                "id='" + id + '\'' +
+                ", email='" + email + '\'' +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", avatar='" + avatar + '\'' +
+                ", type_workout='" + type_workout + '\'' +
+                ", weekly_days=" + Arrays.toString(weekly_days) +
+                ", weekly_workout='" + weekly_workout + '\'' +
+                ", workouts=" + workouts +
+                ", isNew=" + isNew +
+                '}';
+    }
 }

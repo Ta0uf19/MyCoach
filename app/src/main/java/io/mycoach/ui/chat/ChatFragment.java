@@ -1,19 +1,20 @@
 package io.mycoach.ui.chat;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.MutableLiveData;
 
-import com.google.firebase.auth.FirebaseAuth;
+import com.google.common.base.Strings;
+import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
 import com.stfalcon.chatkit.commons.ImageLoader;
 import com.stfalcon.chatkit.messages.MessageInput;
@@ -23,15 +24,16 @@ import com.stfalcon.chatkit.utils.DateFormatter;
 
 
 import java.util.Date;
-import java.util.UUID;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.mycoach.R;
 import io.mycoach.model.Message;
 import io.mycoach.model.User;
+import io.mycoach.repository.AuthRepository;
 import io.mycoach.service.BotResponse;
 import io.mycoach.service.BotService;
+import io.mycoach.utils.MenuUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -44,8 +46,6 @@ public class ChatFragment extends Fragment implements
 {
 
     private int selectionCount;
-    private Date lastLoadedDate;
-    private static final int TOTAL_MESSAGES_COUNT = 100;
 
     private static final String TAG = "ChatFragment";
     protected final String senderId = "0";
@@ -55,9 +55,10 @@ public class ChatFragment extends Fragment implements
 
     private BotService botService;
     private User user;
+    private MutableLiveData<Boolean> loading;
     private User botUser;
 
-
+    @BindView(R.id.loading_chat) ProgressBar pgLoader;
     @BindView(R.id.messagesList) MessagesList messagesList;
     @BindView(R.id.input) MessageInput messageInput;
 
@@ -67,6 +68,7 @@ public class ChatFragment extends Fragment implements
         View view = inflater.inflate(R.layout.fragment_chat, container, false);
         ButterKnife.bind(this, view);
 
+        this.loading = new MutableLiveData<Boolean>();
         this.imageLoader = new ImageLoader() {
             @Override
             public void loadImage(ImageView imageView, String url, Object payload) {
@@ -83,12 +85,16 @@ public class ChatFragment extends Fragment implements
         this.botUser.setName("MyCoashBot");
         this.botUser.setAvatar("https://i.imgur.com/SsGLs1r.png");
 
-        this.user = new User("0");
 
-//        this.user = (FirebaseAuth.getInstance().getCurrentUser()).geta
+        // check user if is auth?
+        // then load content from firebase
+        loadUser();
 
         // init adapter
         initAdapter();
+
+        // show menu
+        MenuUtils.showNavigationMenu(getActivity());
 
         return view;
     }
@@ -102,23 +108,26 @@ public class ChatFragment extends Fragment implements
     public void onStart() {
         super.onStart();
 
-        Message msg1 = new Message(getRandomId(), botUser, "Bonjour, mon nom est MyCoach");
-        messagesAdapter.addToStart(msg1, true);
-
-        Message msg2 = new Message(getRandomId(), botUser, "Je suis votre coach virtuelle, permettez-moi de vous poser quelques questions pour mieux vous connaître");
-        messagesAdapter.addToStart(msg2, true);
-
-        Message msg3 = new Message(getRandomId(), botUser, "Combien de fois tu peux t’entrainer dans la semaine ?");
-        messagesAdapter.addToStart(msg3, true);
+        // si les données chargé.
+        this.loading.observe(getViewLifecycleOwner(), status -> {
+            if(!status)
+                askQuestions();
+        });
     }
 
 
-    /**
-     * Return a random question
-     */
+
     public void askQuestions() {
 
+        String username = (user != null) ? " "+user.getName() : "";
+        Message msg1 = new Message("MYCOASH_TAG", botUser, "Bonjour" + username + ", mon nom est MyCoach");
+        messagesAdapter.addToStart(msg1, true);
 
+        Message msg2 = new Message("MYCOASH_TAG", botUser, "Je suis votre coach virtuelle, permettez-moi de vous poser quelques questions pour mieux vous connaître");
+        messagesAdapter.addToStart(msg2, true);
+
+        Message msg3 = new Message("MYCOASH_TAG", botUser, "Combien de fois tu peux t’entrainer dans la semaine ?");
+        messagesAdapter.addToStart(msg3, true);
     }
 
 
@@ -141,7 +150,7 @@ public class ChatFragment extends Fragment implements
                            BotResponse resp = response.body();
                            Log.d("BotService fullfilment", resp.toString());
 
-                           Message message = new Message(getRandomId(), botUser, resp.getFulfillmentText());
+                           Message message = new Message("MYCOACH_TAG", botUser, resp.getFulfillmentText());
                            messagesAdapter.addToStart(message, true);
 
                        } else {
@@ -156,7 +165,7 @@ public class ChatFragment extends Fragment implements
                });
 
 
-        Message message = new Message(getRandomId(), user, input.toString());
+        Message message = new Message("USER_TAG", user, input.toString());
         messagesAdapter.addToStart(message, true);
        // messagesAdapter.addToStart(MessagesFixtures.getTextMessage(input.toString()), true);
         return true;
@@ -198,7 +207,38 @@ public class ChatFragment extends Fragment implements
         messagesList.setAdapter(messagesAdapter);
     }
 
-    static String getRandomId() {
-        return Long.toString(UUID.randomUUID().getLeastSignificantBits());
+    /**
+     * Load user from db
+     */
+    private void loadUser() {
+        startLoading();
+        FirebaseUser currentUser = AuthRepository.getAuth().getCurrentUser();
+
+        Log.d("currentUser", currentUser.getEmail());
+        if(Strings.isNullOrEmpty(currentUser.getEmail())) {
+            stopLoading();
+            return;
+        }
+
+        AuthRepository.find(currentUser.getEmail()).observe(getViewLifecycleOwner(), user -> {
+            this.user = user;
+//            if(this.user.isNew()) {
+//                this.user.setNew(false);
+//                AuthRepository.update(this.user);
+//            }
+            this.user.setId("0");
+            stopLoading();
+
+            Log.d(TAG, "i received entity user " + user);
+        });
+    }
+
+    private void startLoading() {
+        this.pgLoader.setVisibility(View.VISIBLE);
+        this.loading.setValue(true);
+    }
+    private void stopLoading() {
+        this.pgLoader.setVisibility(View.INVISIBLE);
+        this.loading.setValue(false);
     }
 }
