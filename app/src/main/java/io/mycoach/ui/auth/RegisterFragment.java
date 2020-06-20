@@ -16,11 +16,8 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
 import br.com.simplepass.loadingbutton.customViews.CircularProgressButton;
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import io.mycoach.R;
 import io.mycoach.databinding.FragmentRegisterBinding;
-import io.mycoach.model.User;
 
 public class RegisterFragment extends Fragment {
     private static final String TAG = "RegisterFragment";

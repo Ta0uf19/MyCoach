@@ -14,8 +14,10 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -96,6 +98,7 @@ public class AuthRepository {
                 if(task.isSuccessful()) {
                     Log.d(TAG, "createUserWithEmail:success");
                     user.setId(auth.getCurrentUser().getUid());
+
                     // save user in firestore database
                     saveInFireStore(user);
 
@@ -109,6 +112,41 @@ public class AuthRepository {
             }
         });
 
+        return status;
+    }
+
+
+    /**
+     * Se connecter avec Google
+     *
+     * @param googleAuthCredential
+     * @return
+     */
+    public static LiveData<Boolean> signInWithGoogle(AuthCredential googleAuthCredential) {
+        MutableLiveData<Boolean> status = new MutableLiveData<>();
+
+        auth.signInWithCredential(googleAuthCredential).addOnCompleteListener(authTask -> {
+            if (authTask.isSuccessful()) {
+                boolean isNewUser = authTask.getResult().getAdditionalUserInfo().isNewUser();
+                FirebaseUser firebaseUser = auth.getCurrentUser();
+                if (firebaseUser != null) {
+                    User user = new User();
+                    user.setId(firebaseUser.getUid());
+                    user.setEmail(firebaseUser.getEmail());
+                    user.setName(firebaseUser.getDisplayName());
+                    user.setAvatar(firebaseUser.getPhotoUrl().toString());
+
+                    if(isNewUser)
+                        // save user in firestore database
+                        saveInFireStore(user);
+
+                    status.setValue(true);
+                }
+            } else {
+                status.setValue(false);
+                Log.w(TAG, "signInWithGoogle:failure", authTask.getException());
+            }
+        });
         return status;
     }
 

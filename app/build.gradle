@@ -84,6 +84,8 @@ dependencies {
 
     implementation 'br.com.simplepass:loading-button-android:2.2.0'
 
+    implementation "com.google.android.gms:play-services-auth:18.0.0"
+
     // date picker
     //implementation 'com.vivekkaushik.datepicker:datePickerTimeline:0.0.4'
 

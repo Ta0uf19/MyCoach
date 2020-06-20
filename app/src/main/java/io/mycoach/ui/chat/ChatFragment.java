@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
 import com.stfalcon.chatkit.commons.ImageLoader;
 import com.stfalcon.chatkit.messages.MessageInput;
@@ -83,6 +84,8 @@ public class ChatFragment extends Fragment implements
         this.botUser.setAvatar("https://i.imgur.com/SsGLs1r.png");
 
         this.user = new User("0");
+
+//        this.user = (FirebaseAuth.getInstance().getCurrentUser()).geta
 
         // init adapter
         initAdapter();

@@ -103,7 +103,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/signInGoogle"
         style="@style/btn_style"
         android:layout_width="310dp"
         android:layout_height="wrap_content"
