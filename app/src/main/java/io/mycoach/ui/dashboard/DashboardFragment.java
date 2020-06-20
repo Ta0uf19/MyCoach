@@ -19,6 +19,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.vivekkaushik.datepicker.DatePickerTimeline;
 import com.vivekkaushik.datepicker.OnDateSelectedListener;
 
@@ -34,6 +35,7 @@ import io.mycoach.utils.MenuUtils;
 public class DashboardFragment extends Fragment {
     private static final String TAG = "DashboardFragment";
 
+    private FirebaseAuth auth;
     private LoginViewModel viewModel;
     private NavController navController;
 
@@ -107,21 +109,29 @@ public class DashboardFragment extends Fragment {
 
         initViews(view);
 
-        viewModel = new ViewModelProvider(requireActivity()).get(LoginViewModel.class);
+//        viewModel = new ViewModelProvider(requireActivity()).get(LoginViewModel.class);
+//
+//        viewModel.getAuthState().observe(getViewLifecycleOwner(),
+//                new Observer<LoginViewModel.AuthState>() {
+//                    @Override
+//                    public void onChanged(LoginViewModel.AuthState authState) {
+//                        switch (authState) {
+//                            case AUTHENTICATED:
+//                                //showWelcomeMessage();
+//                                break;
+//                            case UNAUTHENTICATED:
+//                                navController.navigate(R.id.entryFragment);
+//                                break;
+//                        }
+//                    }
+//        });
 
-        viewModel.getAuthState().observe(getViewLifecycleOwner(),
-                new Observer<LoginViewModel.AuthState>() {
-                    @Override
-                    public void onChanged(LoginViewModel.AuthState authState) {
-                        switch (authState) {
-                            case AUTHENTICATED:
-                                //showWelcomeMessage();
-                                break;
-                            case UNAUTHENTICATED:
-                                navController.navigate(R.id.entryFragment);
-                                break;
-                        }
-                    }
-                });
+        auth = FirebaseAuth.getInstance();
+
+        if (auth.getCurrentUser() == null) {
+            navController.navigate(R.id.entryFragment);
+        }
+
+
     }
 }

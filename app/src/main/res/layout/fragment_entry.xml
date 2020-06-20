@@ -110,7 +110,7 @@
         android:layout_marginTop="5dp"
         android:background="@drawable/btn_google"
         android:padding="25sp"
-        android:text="Connexion avec google"
+        android:text="Connexion avec Google"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -105,7 +105,7 @@
 
     <RelativeLayout
         android:id="@+id/timer"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -127,10 +127,12 @@
             android:id="@+id/linearTimer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:radius="80dp"
+            app:radius="60dp"
             app:strokeWidth="3dp"
             app:startingPoint="270"
             app:initialColor="#3B46A0"
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
             app:progressColor="#B5BDF9" />
 
     </RelativeLayout>

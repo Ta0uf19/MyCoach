@@ -26,16 +26,11 @@ public class MainActivity extends AppCompatActivity {
             createBottomNavigation();
         }
 
-//        BottomNavigationViewEx bnve = (BottomNavigationViewEx) findViewById(R.id.bnve);
-//        //Drawable icon = getResources().getDrawable(R.drawable.ic_dashboard);
-//        BottomNavigationItemView btnView = bnve.getBottomNavigationItemView(2);
-//
-//        btnView.setY(-20);
-//        btnView.setIconSize(80);
-
     }
 
-
+    /**
+     * Create bottom menu
+     */
     public void createBottomNavigation() {
 
         BottomNavigationViewEx bottomNavigationView =  findViewById(R.id.bottom_nav);

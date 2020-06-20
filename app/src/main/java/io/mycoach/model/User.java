@@ -1,12 +1,9 @@
 package io.mycoach.model;
 
 import androidx.databinding.BaseObservable;
-
-import com.google.firebase.firestore.Exclude;
 import com.stfalcon.chatkit.commons.models.IUser;
 
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -18,11 +15,11 @@ public class User extends BaseObservable implements IUser, Serializable {
     private String name;
     private String password;
     private String avatar;
-
     private String type_workout;
     private String[] weekly_days;
     private String weekly_workout;
     private Map<String, String> workouts;
+    private boolean isNew;
 
     public User() {
         this.id = UUID.randomUUID().toString().replace("-", "");
@@ -39,6 +36,14 @@ public class User extends BaseObservable implements IUser, Serializable {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public boolean isNew() {
+        return isNew;
+    }
+
+    public void setNew(boolean aNew) {
+        isNew = aNew;
     }
 
     @Override
@@ -111,18 +116,5 @@ public class User extends BaseObservable implements IUser, Serializable {
         this.workouts = workouts;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id='" + id + '\'' +
-                ", email='" + email + '\'' +
-                ", name='" + name + '\'' +
-                ", password='" + password + '\'' +
-                ", avatar='" + avatar + '\'' +
-                ", type_workout='" + type_workout + '\'' +
-                ", weekly_days=" + Arrays.toString(weekly_days) +
-                ", weekly_workout='" + weekly_workout + '\'' +
-                ", workouts=" + workouts +
-                '}';
-    }
+
 }

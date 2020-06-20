@@ -104,7 +104,7 @@ public class WorkoutTimerActivity extends AppCompatActivity implements LinearTim
                     linearTimer.resetTimer();
                 } catch (IllegalStateException e) {
                     e.printStackTrace();
-                    Toast.makeText(WorkoutTimerActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(WorkoutTimerActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
         });

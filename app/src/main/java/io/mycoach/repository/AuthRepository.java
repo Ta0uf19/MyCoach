@@ -14,10 +14,12 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.common.base.Strings;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -89,8 +91,11 @@ public class AuthRepository {
      * @return boolean to indicate if user is created or not
      */
     public static LiveData<Boolean> save(User user) {
+        MutableLiveData<Boolean> status = new MutableLiveData<>(false);
 
-        MutableLiveData<Boolean> status = new MutableLiveData<>();
+        if(user == null || Strings.isNullOrEmpty(user.getEmail()) || Strings.isNullOrEmpty(user.getPassword())) {
+            return status;
+        }
 
         auth.createUserWithEmailAndPassword(user.getEmail(), user.getPassword()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
@@ -98,6 +103,9 @@ public class AuthRepository {
                 if(task.isSuccessful()) {
                     Log.d(TAG, "createUserWithEmail:success");
                     user.setId(auth.getCurrentUser().getUid());
+
+                    // update display name for auth user
+                    updateAuthDisplayName(user.getName());
 
                     // save user in firestore database
                     saveInFireStore(user);
@@ -152,10 +160,9 @@ public class AuthRepository {
 
 
     /**
-     * Signout a user
-     * @param user
+     * Logout user
      */
-    private static void signOut(User user) {
+    public static void logout() {
         auth.signOut();
     }
 
@@ -182,5 +189,18 @@ public class AuthRepository {
                 Log.e(TAG, uidTask.getException().getMessage());
             }
         });
+    }
+
+    private static void updateAuthDisplayName(String name) {
+
+        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                .setDisplayName(name).build();
+        FirebaseUser firebaseUser = getAuth().getCurrentUser();
+        firebaseUser.updateProfile(profileUpdates);
+
+    }
+
+    public static FirebaseAuth getAuth() {
+        return auth;
     }
 }
