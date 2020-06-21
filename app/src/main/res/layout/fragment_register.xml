@@ -47,6 +47,7 @@
             android:layout_width="290dp"
             android:layout_height="wrap_content"
             android:text="Inscription"
+            app:initialCornerAngle="60sp"
             app:spinning_bar_width="4dp"
             app:spinning_bar_color="#FFF"
             app:spinning_bar_padding="6dp"

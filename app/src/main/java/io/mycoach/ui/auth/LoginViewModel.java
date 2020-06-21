@@ -4,6 +4,8 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 
+import com.google.common.base.Strings;
+
 import io.mycoach.repository.AuthRepository;
 
 public class LoginViewModel extends ViewModel {
@@ -23,6 +25,11 @@ public class LoginViewModel extends ViewModel {
     }
 
     public void authenticate(String email, String password) {
+
+        if(Strings.isNullOrEmpty(email) || Strings.isNullOrEmpty(password)) {
+            authState.setValue(AuthState.INVALID_AUTHENTICATION);
+            return;
+        }
 
         this.observer = new Observer<Boolean>() {
             @Override

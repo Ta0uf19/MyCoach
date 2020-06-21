@@ -36,12 +36,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.45" />
 
-    <Button
+    <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
         android:id="@+id/btn_login"
         style="@style/btn_style"
         android:layout_width="290dp"
         android:layout_height="wrap_content"
         android:text="Connexion"
+        app:initialCornerAngle="60sp"
+        app:spinning_bar_width="4dp"
+        app:spinning_bar_color="#FFF"
+        app:spinning_bar_padding="6dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

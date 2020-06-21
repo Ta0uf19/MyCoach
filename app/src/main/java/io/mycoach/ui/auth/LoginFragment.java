@@ -16,6 +16,7 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import br.com.simplepass.loadingbutton.customViews.CircularProgressButton;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.mycoach.R;
@@ -25,7 +26,7 @@ public class LoginFragment extends Fragment {
 
     @BindView(R.id.username_edit_text) EditText username;
     @BindView(R.id.pwd_edit_text) EditText password;
-    @BindView(R.id.btn_login) Button login;
+    @BindView(R.id.btn_login) CircularProgressButton login;
 
     private LoginViewModel viewModel;
 
@@ -48,9 +49,11 @@ public class LoginFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         viewModel = new ViewModelProvider(requireActivity()).get(LoginViewModel.class);
 
-        login.setOnClickListener(v ->
-                viewModel.authenticate(username.getText().toString(), password.getText().toString())
-        );
+
+        login.setOnClickListener(v -> {
+            login.startAnimation();
+            viewModel.authenticate(username.getText().toString(), password.getText().toString());
+        } );
 
         // observe state of auth
         viewModel.getAuthState().observe(getViewLifecycleOwner(), authState -> {
@@ -61,6 +64,8 @@ public class LoginFragment extends Fragment {
                 case INVALID_AUTHENTICATION:
                    Snackbar.make(getView(), "Erreur authentification", Snackbar.LENGTH_SHORT).show();
             }
+
+            login.revertAnimation();
         });
     }
 }
