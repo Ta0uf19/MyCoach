@@ -17,6 +17,7 @@ MyCoach is an AI digital personal training that offer adapted individual follow 
 - [Android Support Library](https://developer.android.com/topic/libraries/support-library/)
 - [Android Architecture Components](https://developer.android.com/topic/libraries/architecture/)
 - [Firebase (Functions, Cloud Firestore, Auth)](https://firebase.google.com/)
+- [Dialogflow](https://cloud.google.com/dialogflow/docs/reference/rest/v2-overview)
 - [ButterKnife](https://jakewharton.github.io/butterknife/)
 - [Picasso](https://github.com/square/picasso)
 - [Circular Image View](https://github.com/lopspower/CircularImageView)
