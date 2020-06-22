@@ -21,7 +21,7 @@ MyCoach is an AI digital personal training that offer adapted individual follow 
 - [Picasso](https://github.com/square/picasso)
 - [Circular Image View](https://github.com/lopspower/CircularImageView)
 - [Progress Circular Button](https://github.com/leandroBorgesFerreira/LoadingButtonAndroid)
-- [ChatKit](https://github.com/stfalcon-studio/ChatKit)
+- [ChatKit UI](https://github.com/stfalcon-studio/ChatKit)
 
 
 ## Contributing
