@@ -12,12 +12,16 @@
         <action
             android:id="@+id/action_entryFragment_to_loginFragment"
             app:destination="@id/loginFragment"
-            app:enterAnim="@android:anim/slide_in_left"
-            app:exitAnim="@android:anim/slide_out_right" />
+            app:enterAnim="@anim/fui_slide_in_right"
+            app:exitAnim="@anim/fui_slide_out_left" />
         <action
             android:id="@+id/action_entryFragment_to_registerFragment"
             app:destination="@id/registerFragment"
-            app:enterAnim="@android:anim/slide_in_left" />
+            app:enterAnim="@anim/fui_slide_in_right" />
+        <action
+            android:id="@+id/action_entryFragment_to_nav_dashboard"
+            app:destination="@id/nav_dashboard"
+            app:enterAnim="@android:anim/fade_in" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"

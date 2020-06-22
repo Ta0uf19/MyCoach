@@ -100,7 +100,7 @@ public class EntryFragment extends Fragment {
 
         AuthRepository.signInWithGoogle(googleAuthCredential).observe(this, status -> {
             if(status)
-                navController.navigate(R.id.action_entryFragment_to_loginFragment);
+                navController.navigate(R.id.action_entryFragment_to_nav_dashboard);
         });
 
     }
