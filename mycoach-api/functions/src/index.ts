@@ -137,9 +137,6 @@ exports.workouts = functions.https.onRequest(async (request, response) => {
                 filtred = doc.data().workouts.filter((o: { date: string; }) => o.date === date);
 
                 console.log(filtred);
-                // filter workouts by a specific date
-                //filtred = workouts.filter(o => o.date === date);
-                //console.info(filtred);
             }
 
         }).catch(e => console.log(e));

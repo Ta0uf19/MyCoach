@@ -123,7 +123,6 @@ public class User extends BaseObservable implements IUser, Serializable {
                 ", password='" + password + '\'' +
                 ", avatar='" + avatar + '\'' +
                 ", type_workout='" + type_workout + '\'' +
-                ", weekly_days=" + weekly_days.toString() +
                 ", weekly_workout='" + weekly_workout + '\'' +
                 ", isNew=" + isNew +
                 '}';

@@ -82,11 +82,11 @@ public class DashboardFragment extends Fragment {
         layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
-        List<Workout> workout = WorkoutRepository.fixtures();
-
-        //static
-        WorkoutAdapter mAdapter = new WorkoutAdapter(workout);
-        recyclerView.setAdapter(mAdapter);
+//        List<Workout> workout = WorkoutRepository.fixtures();
+//
+//        //static
+//        WorkoutAdapter mAdapter = new WorkoutAdapter(workout);
+//        recyclerView.setAdapter(mAdapter);
 
         // calendar setup
         Calendar calendar = Calendar.getInstance();
