@@ -1,0 +1,125 @@
+{
+  "workouts": [
+    {
+      "name": "Développé couché",
+      "name_en": "Bench press",
+      "desc": "Le développé couché est un exercice poly-articulaire de force et de musculation qui consiste à soulever et abaisser une barre d'haltères, développant principalement les pectoraux et les triceps, mais qui sollicite également d'autres muscles comme le grand dorsal, le grand rond, les trapèzes, les deltoïdes antérieurs et les biceps",
+      "duration": "12",
+      "picture": "https://i.snipboard.io/W1EFNe.jpg",
+      "repeats": "12",
+      "sets": "4",
+      "muscle": ["pectoraux", "triceps"]
+    },
+    {
+      "name": "Développé incliné",
+      "name_en": "Bench press",
+      "desc": "Le développé incliné est une variante du développé couché où le banc est incliné (tête plus haute que le torse) pour mettre l'accent sur le haut de la poitrine (pectoraux) et les épaules (deltoïdes). Cet exercice de musculation aide à bâtir une poitrine plus complète et mieux équilibrée",
+      "duration": "12",
+      "picture": "https://i.snipboard.io/jCEsec.jpg",
+      "repeats": "12",
+      "sets": "4",
+      "muscle": ["pectoraux", "triceps"]
+    },
+    {
+      "name": "Ecarté couché",
+      "name_en": "Dumbbell fly end",
+      "desc": "Écarté est un mouvement de musculation qui vise le pectoral, et dans une moindre mesure les épaules1, sans travailler les triceps (arrière du bras).",
+      "duration": "12",
+      "picture": "https://i.snipboard.io/jCEsec.jpg",
+      "repeats": "10",
+      "sets": "4",
+      "muscle": ["pectoraux", "triceps"]
+    },
+    {
+      "name": "Curl barre EZ",
+      "name_en": "Biceps curl",
+      "desc": "La flexion du biceps est un exercice classique de musculation ayant pour cible le muscle biceps brachial. C'est un mouvement d'isolation.",
+      "duration": "12",
+      "picture": "https://i.snipboard.io/M3O1d5.jpg",
+      "repeats": "12",
+      "sets": "5",
+      "muscle": ["pectoraux"]
+    },
+    {
+      "name": "Curls alternés",
+      "name_en": "Biceps curl",
+      "desc": "Le curl avec un haltère est un des exercices de base pour développer la force et le volume musculaire du muscle biceps brachial (muscle du bras).",
+      "duration": "8",
+      "picture": "https://i.snipboard.io/6PUr9u.jpg",
+      "repeats": "12",
+      "sets": "3",
+      "muscle": ["biceps"]
+    },
+    {
+      "name": "Crunch",
+      "name_en": "Crunch",
+      "desc": "Le crunch, ou enroulement vertébral, est l'un des exercices de musculation des abdominaux les plus pratiqués. Il fait surtout travailler le muscle droit de l'abdomen.",
+      "duration": "10",
+      "picture": "https://i.snipboard.io/M3O1d5.jpg",
+      "repeats": "max",
+      "sets": "6",
+      "muscle": ["abdominaux"]
+    },
+    {
+      "name": "Presse",
+      "name_en": "Leg press",
+      "desc": "La presse à cuisses est un mouvement de musculation à machine qui fait travailler les cuisses (plus précisément les vastes externes et interne, le crural et le droit antérieur). Elle sollicite à peu près les mêmes muscles que le squat/équat",
+      "duration": "10",
+      "picture": "https://i.snipboard.io/P9umXU.jpg",
+      "repeats": "5",
+      "sets": "12",
+      "muscle": ["cuisses"]
+    },
+    {
+      "name": "Legs extension",
+      "name_en": "Legs extension",
+      "desc": "The leg extension is a resistance weight training exercise that targets the quadriceps muscle in the legs. The exercise is done using a machine called the Leg Extension Machine.",
+      "duration": "10",
+      "picture": "https://i.snipboard.io/P9umXU.jpg",
+      "repeats": "3",
+      "sets": "12",
+      "muscle": ["cuisses"]
+    },
+    {
+      "name": "Legs curl",
+      "name_en": "Legs curl",
+      "desc": "Le leg curl est une activité de musculation des membres inférieurs qui consiste à soulever une charge par flexion de la jambe par l'action des ischio-jambiers.",
+      "duration": "10",
+      "picture": "https://i.snipboard.io/P9umXU.jpg",
+      "repeats": "3",
+      "sets": "12",
+      "muscle": ["cuisses"]
+    },
+    {
+      "name": "Développé militaire cadre guidé",
+      "name_en": "Développé épaules",
+      "desc": "Le développé militaire (épaules) est un mouvement de musculation de base qui fait travailler les épaules, plus précisément les faisceaux antérieur et moyen du deltoïde, et indirectement les triceps (arrière du bras), les trapèzes, le haut de la poitrine et le dentelé antérieur",
+      "duration": "10",
+      "picture": "https://i.snipboard.io/P9umXU.jpg",
+      "repeats": "3",
+      "sets": "12",
+      "muscle": ["épaules"]
+    },
+    {
+      "name": "Oiseau",
+      "name_en": "Side Lateral Raise",
+      "desc": "L’oiseau est un exercice de musculation qu’on appelle aussi élévations latérales buste penché. C’est un exercice d’isolation qui sollicite l’arrière des épaules et permet de cibler cette zone",
+      "duration": "10",
+      "picture": "https://i.snipboard.io/P9umXU.jpg",
+      "repeats": "3",
+      "sets": "12",
+      "muscle": ["épaules"]
+    },
+    {
+      "name": "Gainage planche",
+      "name_en": "Plank",
+      "desc": "La planche est un exercice de gainage qui implique le maintien d'une position similaire à celle d'une pompe le plus de temps possible.",
+      "duration": "10",
+      "picture": "https://i.snipboard.io/P9umXU.jpg",
+      "repeats": "3",
+      "sets": "12",
+      "muscle": ["abdominaux"]
+    }
+  ]
+
+}

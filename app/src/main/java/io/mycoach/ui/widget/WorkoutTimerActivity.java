@@ -60,7 +60,7 @@ public class WorkoutTimerActivity extends AppCompatActivity implements LinearTim
 
         title.setText(workout.getName());
         time.setText(workout.getDuration()+":00");
-        repeats.setText(Integer.toString(workout.getRepeats()));
+        repeats.setText(workout.getRepeats());
         sets.setText(Integer.toString(workout.getSets()));
 
         // duration in minutes

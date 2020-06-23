@@ -7,7 +7,7 @@ public class Workout implements Serializable {
     private String name;
     private String desc;
     private String picture;
-    private int repeats;
+    private String repeats;
     private int duration; // minutes
     private int sets;
 
@@ -21,7 +21,7 @@ public class Workout implements Serializable {
      * @param sets repetition of exercice
      * @param duration in minutes
      */
-    public Workout(String name, String picture, int repeats, int sets, int duration) {
+    public Workout(String name, String picture, String repeats, int sets, int duration) {
         this.name = name;
         this.picture = picture;
         this.repeats = repeats;
@@ -49,7 +49,7 @@ public class Workout implements Serializable {
         return picture;
     }
 
-    public int getRepeats() {
+    public String getRepeats() {
         return repeats;
     }
 

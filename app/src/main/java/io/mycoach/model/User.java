@@ -6,6 +6,7 @@ import com.stfalcon.chatkit.commons.models.IUser;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -17,9 +18,9 @@ public class User extends BaseObservable implements IUser, Serializable {
     private String password;
     private String avatar;
     private String type_workout;
-    private String[] weekly_days;
+    private List<Integer> weekly_days;
     private String weekly_workout;
-    private Map<String, String> workouts;
+    //private List<Workout> workouts;
     private boolean isNew;
 
     public User() {
@@ -27,7 +28,7 @@ public class User extends BaseObservable implements IUser, Serializable {
     }
     public User(String id) {
         this.id = id;
-        this.workouts = new HashMap<String, String>();
+        //this.workouts = new HashMap<String, String>();
     }
     public User(String email, String password) {
         this(UUID.randomUUID().toString());
@@ -93,12 +94,8 @@ public class User extends BaseObservable implements IUser, Serializable {
         this.type_workout = type_workout;
     }
 
-    public String[] getWeekly_days() {
+    public List<Integer> getWeekly_days() {
         return weekly_days;
-    }
-
-    public void setWeekly_days(String[] weekly_days) {
-        this.weekly_days = weekly_days;
     }
 
     public String getWeekly_workout() {
@@ -109,13 +106,13 @@ public class User extends BaseObservable implements IUser, Serializable {
         this.weekly_workout = weekly_workout;
     }
 
-    public Map<String, String> getWorkouts() {
+    /*public Map<String, String> getWorkouts() {
         return workouts;
     }
 
     public void setWorkouts(Map<String, String> workouts) {
         this.workouts = workouts;
-    }
+    }*/
 
     @Override
     public String toString() {
@@ -126,9 +123,8 @@ public class User extends BaseObservable implements IUser, Serializable {
                 ", password='" + password + '\'' +
                 ", avatar='" + avatar + '\'' +
                 ", type_workout='" + type_workout + '\'' +
-                ", weekly_days=" + Arrays.toString(weekly_days) +
+                ", weekly_days=" + weekly_days.toString() +
                 ", weekly_workout='" + weekly_workout + '\'' +
-                ", workouts=" + workouts +
                 ", isNew=" + isNew +
                 '}';
     }

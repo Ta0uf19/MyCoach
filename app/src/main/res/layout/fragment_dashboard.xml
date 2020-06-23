@@ -96,7 +96,7 @@
             <include layout="@layout/content_list_workout"/>
 
             <ProgressBar
-                android:id="@+id/progress_circular"
+                android:id="@+id/loading_dashboard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

@@ -32,7 +32,7 @@ import io.mycoach.model.Message;
 import io.mycoach.model.User;
 import io.mycoach.repository.AuthRepository;
 import io.mycoach.service.BotResponse;
-import io.mycoach.service.BotService;
+import io.mycoach.service.Service;
 import io.mycoach.utils.MenuUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -46,14 +46,12 @@ public class ChatFragment extends Fragment implements
 {
 
     private int selectionCount;
-
     private static final String TAG = "ChatFragment";
-    protected final String senderId = "0";
-    protected ImageLoader imageLoader;
+    private ImageLoader imageLoader;
 
-    protected MessagesListAdapter<Message> messagesAdapter;
+    private MessagesListAdapter<Message> messagesAdapter;
 
-    private BotService botService;
+    private Service botService;
     private User user;
     private MutableLiveData<Boolean> loading;
     private User botUser;
@@ -78,10 +76,10 @@ public class ChatFragment extends Fragment implements
 
         this.messageInput.setInputListener(this);
 
-        this.botService = new BotService();
+        this.botService = new Service();
 
         // set bot as a user
-        this.botUser = new User("1");
+        this.botUser = new User();
         this.botUser.setName("MyCoashBot");
         this.botUser.setAvatar("https://i.imgur.com/SsGLs1r.png");
 
@@ -142,7 +140,7 @@ public class ChatFragment extends Fragment implements
         Log.d(TAG, input.toString());
 
        botService
-               .sendMessage("3f", input.toString())
+               .sendMessage(user.getEmail(), input.toString())
                .enqueue(new Callback<BotResponse>() {
                    @Override
                    public void onResponse(Call<BotResponse> call, Response<BotResponse> response) {
@@ -165,7 +163,7 @@ public class ChatFragment extends Fragment implements
                });
 
 
-        Message message = new Message("USER_TAG", user, input.toString());
+        Message message = new Message(user.getId(), user, input.toString());
         messagesAdapter.addToStart(message, true);
        // messagesAdapter.addToStart(MessagesFixtures.getTextMessage(input.toString()), true);
         return true;
@@ -199,8 +197,9 @@ public class ChatFragment extends Fragment implements
        Log.i("TAG", "onLoadMore: " + page + " " + totalItemsCount);
     }
 
+
     private void initAdapter() {
-        messagesAdapter = new MessagesListAdapter<>(senderId, imageLoader);
+        messagesAdapter = new MessagesListAdapter<>(AuthRepository.getAuth().getCurrentUser().getUid(), imageLoader);
         messagesAdapter.enableSelectionMode(this);
         messagesAdapter.setLoadMoreListener(this);
         messagesAdapter.setDateHeadersFormatter(this);
@@ -222,11 +221,12 @@ public class ChatFragment extends Fragment implements
 
         AuthRepository.find(currentUser.getEmail()).observe(getViewLifecycleOwner(), user -> {
             this.user = user;
+
 //            if(this.user.isNew()) {
 //                this.user.setNew(false);
 //                AuthRepository.update(this.user);
 //            }
-            this.user.setId("0");
+
             stopLoading();
 
             Log.d(TAG, "i received entity user " + user);

@@ -1,5 +1,7 @@
 package io.mycoach.service;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -7,15 +9,15 @@ import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class BotService {
+public class Service {
 
     private Retrofit retrofit;
-    private BotServiceInterface api;
+    private ServiceInterface api;
 
     private static final String BASE_URL = "https://us-central1-mycoach-77f86.cloudfunctions.net/";
 
 
-    public BotService() {
+    public Service() {
         Gson gson = new GsonBuilder()
                 .setLenient()
                 .create();
@@ -24,7 +26,7 @@ public class BotService {
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
-        this.api = retrofit.create(BotServiceInterface.class);
+        this.api = retrofit.create(ServiceInterface.class);
     }
 
     /**
@@ -49,6 +51,7 @@ public class BotService {
      */
 
     public Call<WorkoutResponse> getWorkoutsByDate(String email, String date) {
+        Log.d("Make request", email + " " + date);
         WorkoutRequest workoutRequest = new WorkoutRequest(email, date);
         Call<WorkoutResponse> call = this.api.getWorkoutsByDate(workoutRequest);
         return call;
