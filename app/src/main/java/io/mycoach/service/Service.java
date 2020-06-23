@@ -40,4 +40,18 @@ public class BotService {
         return call;
     }
 
+
+    /**
+     * Get workouts for user by a specific date
+     * @param email (email)
+     * @param date (string YYYY-MM-DD)
+     *
+     */
+
+    public Call<WorkoutResponse> getWorkoutsByDate(String email, String date) {
+        WorkoutRequest workoutRequest = new WorkoutRequest(email, date);
+        Call<WorkoutResponse> call = this.api.getWorkoutsByDate(workoutRequest);
+        return call;
+    }
+
 }
