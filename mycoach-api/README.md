@@ -22,7 +22,7 @@ Query
 -  Detect intention and update workout data
 
 ### POST /workouts
-- Get workouts of a user in a specfic date
+- Get workouts of a user in a specific date
 ```
 {
     "session": "demo@gmail.com",
