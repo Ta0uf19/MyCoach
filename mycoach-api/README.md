@@ -25,7 +25,7 @@ Query
 - Get workouts of a user in a specfic date
 ```
 {
-	"userId": "50",
+    "session": "demo@gmail.com",
     "date": "2020-06-18"
 }
 ```
