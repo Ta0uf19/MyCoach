@@ -117,6 +117,9 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
     public void setDateSelectedListener(OnDateSelectedListener listener) {
         this.listener = listener;
     }
+    public OnDateSelectedListener getDateSelectedListener() {
+        return this.listener;
+    }
 
     class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView monthView, dateView, dayView;

@@ -90,7 +90,6 @@ public class DashboardFragment extends Fragment {
 
         // calendar setup
         Calendar calendar = Calendar.getInstance();
-        datePickerTimeline.setActiveDate(calendar);
 
         // Set a Start date
         datePickerTimeline.setInitialDate(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
@@ -119,8 +118,6 @@ public class DashboardFragment extends Fragment {
                                     recyclerView.setAdapter(mAdapter);
 
                                     hideProgress();
-
-
                                     //Log.d("Workout response : ", resp.getWorkouts().toString());
 
                                 } else {
@@ -141,6 +138,10 @@ public class DashboardFragment extends Fragment {
                 // Do Something
             }
         });
+
+        // set active date
+        if(AuthRepository.getAuth().getCurrentUser() != null)
+            datePickerTimeline.setActiveDate(calendar);
     }
 
     @Override

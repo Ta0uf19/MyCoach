@@ -102,7 +102,7 @@ exports.detectIntent = functions.https.onRequest(async (request, response) => {
             }
 
             // update user workouts
-            await userRef.update({workouts: workouts , weekly_days: days});
+            await userRef.update({workouts: workouts , weekly_days: days, new: false});
 
         }).catch((err: any) => {
                 console.log('Error getting documents', err);

@@ -104,6 +104,7 @@ public class TimelineView extends RecyclerView {
         adapter.setDateSelectedListener(listener);
     }
 
+
     public void setInitialDate(int year, int month, int date) {
         this.year = year;
         this.month = month;
@@ -122,12 +123,18 @@ public class TimelineView extends RecyclerView {
             long diff =  activeDate.getTime().getTime() - initialDate.getTime();
             int position = (int) (diff / (1000 * 60 * 60 * 24));
             adapter.setSelectedPosition(position);
+            adapter.getDateSelectedListener().onDateSelected(activeDate.get(Calendar.YEAR), activeDate.get(Calendar.MONTH) + 1, activeDate.get(Calendar.DAY_OF_MONTH), activeDate.get(Calendar.DAY_OF_WEEK));
             invalidate();
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
     }
+
+    /**
+     *
+     * @param deactivatedDates
+     */
 
     public void deactivateDates(Date[] deactivatedDates) {
         adapter.disableDates(deactivatedDates);

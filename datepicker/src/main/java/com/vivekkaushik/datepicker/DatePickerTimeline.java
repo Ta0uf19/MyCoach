@@ -123,4 +123,5 @@ public class DatePickerTimeline extends LinearLayout {
     public void deactivateDates(Date[] dates) {
         timelineView.deactivateDates(dates);
     }
+
 }

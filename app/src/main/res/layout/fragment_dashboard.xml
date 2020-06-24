@@ -42,7 +42,7 @@
                     android:paddingStart="10dp"
                     android:paddingTop="30dp"
                     android:paddingEnd="10dp"
-                    android:text="Mar 20 Mai 2020"
+                    android:text="Mer 24 Juin 2020"
                     android:textColor="@color/white"
                     android:textSize="14sp" />
 

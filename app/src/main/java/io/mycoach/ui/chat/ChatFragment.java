@@ -42,8 +42,7 @@ public class ChatFragment extends Fragment implements
         MessageInput.InputListener,
         DateFormatter.Formatter,
         MessagesListAdapter.SelectionListener,
-        MessagesListAdapter.OnLoadMoreListener
-{
+        MessagesListAdapter.OnLoadMoreListener {
 
     private int selectionCount;
     private static final String TAG = "ChatFragment";
@@ -113,19 +112,29 @@ public class ChatFragment extends Fragment implements
         });
     }
 
-
-
+    /**
+     * Introduce user
+     */
     public void askQuestions() {
 
-        String username = (user != null) ? " "+user.getName() : "";
-        Message msg1 = new Message("MYCOASH_TAG", botUser, "Bonjour" + username + ", mon nom est MyCoach");
-        messagesAdapter.addToStart(msg1, true);
+        // new
+        if(user != null && !user.isNew()) {
+            Message  msg = new Message("MYCOASH_TAG", botUser, "Hey \uD83D\uDC4B " + user.getName() +" Je suis votre coach virtuelle, si vous voulez quelques choses je suis là pour vous!");
+            messagesAdapter.addToStart(msg, true);
+        }
 
-        Message msg2 = new Message("MYCOASH_TAG", botUser, "Je suis votre coach virtuelle, permettez-moi de vous poser quelques questions pour mieux vous connaître");
-        messagesAdapter.addToStart(msg2, true);
+        else {
+            String username = (user != null) ? " "+user.getName() : "";
+            Message msg1 = new Message("MYCOASH_TAG", botUser, "Bonjour \uD83D\uDC4B " + username + ", mon nom est MyCoach");
+            messagesAdapter.addToStart(msg1, true);
 
-        Message msg3 = new Message("MYCOASH_TAG", botUser, "Combien de fois tu peux t’entrainer dans la semaine ?");
-        messagesAdapter.addToStart(msg3, true);
+            Message msg2 = new Message("MYCOASH_TAG", botUser, "Je suis votre coach virtuelle, permettez-moi de vous poser quelques questions pour mieux vous connaître");
+            messagesAdapter.addToStart(msg2, true);
+
+            Message msg3 = new Message("MYCOASH_TAG", botUser, "Combien de fois tu peux t’entrainer dans la semaine ?");
+            messagesAdapter.addToStart(msg3, true);
+
+        }
     }
 
 
@@ -165,7 +174,7 @@ public class ChatFragment extends Fragment implements
 
         Message message = new Message(user.getId(), user, input.toString());
         messagesAdapter.addToStart(message, true);
-       // messagesAdapter.addToStart(MessagesFixtures.getTextMessage(input.toString()), true);
+
         return true;
     }
 
@@ -219,14 +228,12 @@ public class ChatFragment extends Fragment implements
             return;
         }
 
+        // init user
         AuthRepository.find(currentUser.getEmail()).observe(getViewLifecycleOwner(), user -> {
             this.user = user;
 
-//            if(this.user.isNew()) {
-//                this.user.setNew(false);
-//                AuthRepository.update(this.user);
-//            }
 
+            // stop loading
             stopLoading();
 
             Log.d(TAG, "i received entity user " + user);

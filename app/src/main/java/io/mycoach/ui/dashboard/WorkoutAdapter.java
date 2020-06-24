@@ -43,6 +43,9 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.ViewHold
         @BindView(R.id.workout_repeats)
         TextView repeats;
 
+        @BindView(R.id.workout_repos)
+        TextView repos;
+
         private View itemView;
 
         public ViewHolder(View itemView) {
@@ -65,6 +68,7 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.ViewHold
         Workout workout = workoutList.get(position);
         holder.name.setText(workout.getName());
         holder.repeats.setText(workout.getSets() + " SER | "+ workout.getRepeats() +  " REP");
+        //holder.repos.setText(workout.get);
         Picasso.get().load(workout.getPicture()).into(holder.picture);
 
         holder.itemView.setOnClickListener(view -> {
