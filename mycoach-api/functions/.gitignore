@@ -6,3 +6,6 @@
 typings/
 
 node_modules/
+
+service-account-key.json
+lib/service-account-key.json
