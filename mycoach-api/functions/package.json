@@ -19,7 +19,7 @@
     "firebase-functions": "^3.6.1",
     "firestore-export-import": "^0.6.0",
     "lodash": "^4.17.15",
-    "moment": "^2.27.0",
+    "moment": "^2.29.2",
     "uid": "^1.0.0"
   },
   "devDependencies": {
